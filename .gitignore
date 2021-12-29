@@ -1,1 +1,4 @@
 backend/tmp/*
+backend/log/*
+code-server/*
+.bash_history
