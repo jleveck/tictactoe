@@ -2,7 +2,7 @@ FROM ruby:2.6.1-slim
 ARG VERSION=4.0.0
 
 RUN apt-get update -qq
-RUN apt-get install -y build-essential default-libmysqlclient-dev default-mysql-client imagemagick libmagickwand-dev curl git sudo apt-transport-https unzip cmake vim jq wget app-utils
+RUN apt-get install -y build-essential default-libmysqlclient-dev default-mysql-client imagemagick libmagickwand-dev curl git sudo apt-transport-https unzip cmake vim jq wget
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
        && apt-get install -y nodejs
