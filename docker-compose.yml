@@ -33,7 +33,7 @@ services:
   codeserver:
     build: .
     command: >
-        bash -c "code-server/code-server --bind-addr 0.0.0.0:8080 --user-data-dir code-server/data/user-data-dir --extensions-dir code-server/data/extensions-dir
+        bash -c "code-server/bin/code-server --bind-addr 0.0.0.0:8080 --user-data-dir code-server/data/user-data-dir --extensions-dir code-server/data/extensions-dir &&
                while true ;do wait ;done"
     volumes:
       - .:/app
