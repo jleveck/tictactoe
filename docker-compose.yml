@@ -1,43 +1,20 @@
 version: '2'
 services:
-  backend:
-    build: .
-    command: >
-        bash -c "cd backend && (cmake --version || sudo apt-get update && sudo apt-get -y install cmake) &&
-               (sudo apt list --installed 2>/dev/null | grep 'libsqlite3-dev' || sudo apt-get update && sudo apt install libsqlite3-dev) &&
-               rm -f tmp/pids/server.pid &&
-               gem update --system &&
-               gem install bundler -v 2.1.2 &&
-               bundle install &&
-               bundle exec rails s -p 3001 -b '0.0.0.0' &&
-               while true ;do wait ;done"
-    volumes:
-      - .:/app:cached
-      - /app/.cache
-    ports:
-      - "3001:3001"
-
-  frontend:
-    build: .
-    command: >
-        bash -c "cd frontend &&
-               npm install &&
-               npm start &&
-               while true ;do wait ;done"
-    volumes:
-      - .:/app:cached
-      - /app/frontend/node_modules
-    ports:
-      - "3000:3000"
-
   codeserver:
     build: .
     command: >
-        bash -c "code-server/bin/code-server --bind-addr 0.0.0.0:8080 --user-data-dir code-server/data/user-data-dir --extensions-dir code-server/data/extensions-dir &&
-               while true ;do wait ;done"
+        sh -c "/app/entrypoint/codeserver.sh"
+
     volumes:
       - .:/app
+      - bundle_path:/bundle
+      - /app/frontend/node_modules
     ports:
-      - "8080:8080"
+      - "3000:3000" # frontend
+      - "3001:3001" # backend
+      - "8080:8080" # codeserver
     environment:
       - PASSWORD
+      - BUNDLE_PATH=/bundle/vendor
+volumes:
+  bundle_path:
