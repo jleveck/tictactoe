@@ -3,8 +3,7 @@ services:
   codeserver:
     build: .
     command: >
-        sh -c "/app/entrypoint/codeserver.sh"
-
+        bash -c "while true ;do wait ;done"
     volumes:
       - .:/app
       - bundle_path:/bundle
