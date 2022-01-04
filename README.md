@@ -22,7 +22,25 @@ rvm use ruby-2.5.3
 gem install rails
 ```
 
-## Running
+## Running With Docker
+* Open three terminal windows, in the first run:
+```
+docker-compose up
+```
+
+* In the second terminal, navigate to /tictactoe/frontend
+```
+docker-compose exec web bash
+./entrypoint/backend.sh
+```
+
+* In the third terminal, navigate to /tictactoe/frontend
+```
+docker-compose exec web bash
+./entrypoint/frontend.sh
+```
+
+## Running Without Docker
 * Open two terminal windows, in the first run:
 ```
 git clone https://github.com/MiloTodt/tictactoe.git

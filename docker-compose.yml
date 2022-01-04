@@ -1,6 +1,6 @@
 version: '2'
 services:
-  codeserver:
+  web:
     build: .
     command: >
         bash -c "while true ;do wait ;done"
